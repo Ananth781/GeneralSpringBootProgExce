@@ -1,0 +1,36 @@
+name: 04-using-actions
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  java-mvn-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run the Maven verify phase
+        run: mvn --batch-mode --update-snapshots verify
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: target/*.jar
+
+      - name: Package Maven project
+        run: mvn package
+
+
+    
+  
+ 
