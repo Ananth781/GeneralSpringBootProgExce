@@ -30,6 +30,11 @@ jobs:
       - name: Package Maven project
         run: mvn package
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+         node-version: '20.x'
+
 
     
   
